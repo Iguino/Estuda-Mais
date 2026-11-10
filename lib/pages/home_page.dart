@@ -47,22 +47,55 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      // Imagem principal do projeto.
-                      // BoxFit.contain mostra a imagem inteira.
-                      Container(
-                        width: double.infinity,
-                        height: larguraGrande ? 210 : 155,
-                        decoration: BoxDecoration(
-                          color: azulClaro,
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(18),
-                          child: Image.asset(
-                            'assets/images/estudo_banner.jpg',
-                            fit: BoxFit.contain,
+                      // IMAGEM 1 + STACK + POSITIONED
+                      Stack(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: larguraGrande ? 210 : 155,
+                            decoration: BoxDecoration(
+                              color: azulClaro,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(18),
+                              child: Image.asset(
+                                'assets/images/estudo_banner.jpg',
+                                fit: BoxFit.contain,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Center(
+                                    child: Text(
+                                      'Não foi possível carregar o banner.',
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
                           ),
-                        ),
+
+                          // Texto posicionado sobre a imagem.
+                          Positioned(
+                            left: 14,
+                            bottom: 12,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.92),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Text(
+                                'Planeje seus estudos!',
+                                style: TextStyle(
+                                  color: azulPrincipal,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
 
                       const SizedBox(height: 28),
@@ -109,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
 
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 26),
 
                       const Text(
                         'O que deseja fazer?',
@@ -122,17 +155,12 @@ class _HomePageState extends State<HomePage> {
 
                       const SizedBox(height: 14),
 
-                      // Botões organizados conforme o tamanho da tela.
                       if (larguraGrande)
                         Row(
                           children: [
-                            Expanded(
-                              child: _botaoCadastrar(),
-                            ),
+                            Expanded(child: _botaoCadastrar()),
                             const SizedBox(width: 16),
-                            Expanded(
-                              child: _botaoListar(),
-                            ),
+                            Expanded(child: _botaoListar()),
                           ],
                         )
                       else
@@ -152,7 +180,33 @@ class _HomePageState extends State<HomePage> {
 
                       const SizedBox(height: 28),
 
-                      // Switch para demonstrar o setState().
+                      // IMAGEM 2
+                      Container(
+                        width: double.infinity,
+                        height: larguraGrande ? 150 : 125,
+                        decoration: BoxDecoration(
+                          color: azulClaro,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.asset(
+                            'assets/images/livros.jpg',
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Center(
+                                child: Text(
+                                  'Não foi possível carregar a imagem dos livros.',
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 22),
+
+                      // INTERAÇÃO COM SETSTATE
                       Card(
                         elevation: 1,
                         color: Colors.white,
@@ -246,7 +300,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Botão para abrir o formulário de cadastro.
+  // Abre a tela de cadastro.
   Widget _botaoCadastrar() {
     return ElevatedButton.icon(
       icon: const Icon(Icons.add_task),
@@ -272,7 +326,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Botão para abrir a lista de tarefas.
+  // Abre a lista de tarefas.
   Widget _botaoListar() {
     return OutlinedButton.icon(
       icon: const Icon(Icons.list_alt),
