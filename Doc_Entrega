@@ -1,0 +1,43 @@
+ESTUDA+ — APLICATIVO DE ORGANIZAÇÃO DE ESTUDOS
+
+Tema: Aplicativo móvel para organização de tarefas e estudos.
+Objetivo do projeto
+O Estuda+ é um aplicativo desenvolvido em Flutter com o objetivo de auxiliar estudantes na organização de suas atividades acadêmicas. Por meio dele, é possível cadastrar tarefas, informar a disciplina correspondente, adicionar descrições, marcar atividades importantes e acompanhar quais tarefas já foram concluídas.
+Funcionalidades desenvolvidas
+•	Tela inicial com apresentação do aplicativo e acesso às demais funcionalidades.
+•	Cadastro de tarefas com título, descrição e disciplina.
+•	Seleção de disciplina por meio de opções de escolha.
+•	Identificação de tarefas importantes por checkbox.
+•	Listagem das tarefas cadastradas.
+•	Atualização do status das tarefas entre pendentes e concluídas.
+•	Armazenamento dos dados utilizando Firebase Cloud Firestore.
+•	Atualização da lista em tempo real por meio de StreamBuilder e snapshots.
+Funcionalidade adicional
+
+Foi implementada a integração com a API ViaCEP, permitindo que o usuário informe um CEP e obtenha automaticamente informações de endereço, como rua, bairro e cidade. Essa funcionalidade foi escolhida para demonstrar a integração do aplicativo com um serviço externo e facilitar o preenchimento de informações.
+Tecnologias utilizadas
+•	Flutter e linguagem Dart.
+•	Firebase Core.
+•	Cloud Firestore.
+•	API ViaCEP.
+•	Biblioteca HTTP para requisições externas.
+
+Integrantes e responsabilidades
+•	Integrante 1: Igor Henrique de Paulo - Coordenador
+•	Integrante 2: Diego Bueno Domingues – Interface e Layout
+•	Integrante 3: Renan Gustavo Freitas Teixeira – Navegação e Formulário
+•	Integrante 4: Nicolas Ribeiro Silva - Dados e Firebase
+•	Integrante 5: Erick Henrique Lopes Nascimento – Recurso Adicional e Qualidade
+
+Justificativa da escolha
+O projeto foi desenvolvido com a proposta de oferecer uma ferramenta simples e prática para auxiliar estudantes a organizarem sua rotina acadêmica. A utilização do Flutter possibilitou a construção da interface, enquanto o Firebase permitiu armazenar e atualizar os dados das tarefas. A integração com a API ViaCEP acrescentou uma funcionalidade externa ao aplicativo, ampliando os conhecimentos trabalhados durante o desenvolvimento.
+
+Referências
+Vinicius de Novaes.  Aulas com conteúdo DART. Disponível em: https://viniciusdenovaes.github.io 
+DART. Dart Documentation: Language tour & Asynchronous programming. Disponível em: https://dart.dev/guides. 
+DART PACKAGES. http: A composable, multi-platform, Future-based API for HTTP requests. Pub.dev. Disponível em: https://pub.dev/packages/http. 
+FIREBASE. Cloud Firestore Documentation: Add data & Get realtime updates. Disponível em: https://firebase.google.com/docs/firestore. 
+FIREBASE. FlutterFire Overview: Firebase Core & Cloud Firestore for Flutter. Disponível em: https://firebase.flutter.dev/. 
+FLUTTER. Flutter Documentation: User interface, Forms & State management. Disponível em: https://docs.flutter.dev/. 
+FLUTTER API. StreamBuilder class — widgets library. Disponível em: https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html. 
+VIACEP. Webservice gratuito e de alto desempenho para consulta de Códigos de Endereçamento Postal (CEP) do Brasil. Disponível em: https://viacep.com.br/. 
