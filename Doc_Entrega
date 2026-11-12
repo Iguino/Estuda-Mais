@@ -41,3 +41,5 @@ FIREBASE. FlutterFire Overview: Firebase Core & Cloud Firestore for Flutter. Dis
 FLUTTER. Flutter Documentation: User interface, Forms & State management. Disponível em: https://docs.flutter.dev/. 
 FLUTTER API. StreamBuilder class — widgets library. Disponível em: https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html. 
 VIACEP. Webservice gratuito e de alto desempenho para consulta de Códigos de Endereçamento Postal (CEP) do Brasil. Disponível em: https://viacep.com.br/. 
+VIACEP. Site para implementação da API. Disponível em: https://medium.com/flutter-comunidade-br/consultando-ceps-com-flutter-a395b86ce34a.
+VIACEP. Video de implementação do ViaCEP. Disponível em: https://youtu.be/y_HpEEYatro?is=hK3f6xdaMhNAXhaa.
