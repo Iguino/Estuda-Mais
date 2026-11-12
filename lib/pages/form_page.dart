@@ -1,5 +1,5 @@
-import 'dart:convert';
 
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -61,6 +61,8 @@ class _FormPageState extends State<FormPage> {
       final url = Uri.https('viacep.com.br', '/ws/$cep/json/');
       final resposta = await http.get(url);
 
+      if (!mounted) return;
+
       if (resposta.statusCode == 200) {
         final dados = jsonDecode(resposta.body) as Map<String, dynamic>;
 
@@ -78,13 +80,17 @@ class _FormPageState extends State<FormPage> {
         throw Exception('Não foi possível consultar o CEP.');
       }
     } catch (erro) {
+      if (!mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erro na consulta: $erro')),
       );
     } finally {
-      setState(() {
-        consultandoCep = false;
-      });
+      if (mounted) {
+        setState(() {
+          consultandoCep = false;
+        });
+      }
     }
   }
 
@@ -116,11 +122,15 @@ class _FormPageState extends State<FormPage> {
       });
 
       if (!mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Tarefa salva na nuvem!')),
       );
+
       Navigator.pop(context);
     } catch (erro) {
+      if (!mounted) return;
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Não foi possível salvar: $erro')),
       );
@@ -188,57 +198,44 @@ class _FormPageState extends State<FormPage> {
               const SizedBox(height: 20),
               const Text(
                 'Disciplina',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              RadioListTile<Disciplina>(
-                title: const Text('Matemática'),
-                value: Disciplina.matematica,
+              RadioGroup<Disciplina>(
                 groupValue: disciplinaSelecionada,
                 onChanged: (value) {
-                  setState(() {
-                    disciplinaSelecionada = value!;
-                  });
+                  if (value != null) {
+                    setState(() {
+                      disciplinaSelecionada = value;
+                    });
+                  }
                 },
-              ),
-              RadioListTile<Disciplina>(
-                title: const Text('Português'),
-                value: Disciplina.portugues,
-                groupValue: disciplinaSelecionada,
-                onChanged: (value) {
-                  setState(() {
-                    disciplinaSelecionada = value!;
-                  });
-                },
-              ),
-              RadioListTile<Disciplina>(
-                title: const Text('Programação'),
-                value: Disciplina.programacao,
-                groupValue: disciplinaSelecionada,
-                onChanged: (value) {
-                  setState(() {
-                    disciplinaSelecionada = value!;
-                  });
-                },
-              ),
-              RadioListTile<Disciplina>(
-                title: const Text('História'),
-                value: Disciplina.historia,
-                groupValue: disciplinaSelecionada,
-                onChanged: (value) {
-                  setState(() {
-                    disciplinaSelecionada = value!;
-                  });
-                },
-              ),
-              RadioListTile<Disciplina>(
-                title: const Text('Outras'),
-                value: Disciplina.outras,
-                groupValue: disciplinaSelecionada,
-                onChanged: (value) {
-                  setState(() {
-                    disciplinaSelecionada = value!;
-                  });
-                },
+                child: Column(
+                  children: [
+                    RadioListTile<Disciplina>(
+                      title: const Text('Matemática'),
+                      value: Disciplina.matematica,
+                    ),
+                    RadioListTile<Disciplina>(
+                      title: const Text('Português'),
+                      value: Disciplina.portugues,
+                    ),
+                    RadioListTile<Disciplina>(
+                      title: const Text('Programação'),
+                      value: Disciplina.programacao,
+                    ),
+                    RadioListTile<Disciplina>(
+                      title: const Text('História'),
+                      value: Disciplina.historia,
+                    ),
+                    RadioListTile<Disciplina>(
+                      title: const Text('Outras'),
+                      value: Disciplina.outras,
+                    ),
+                  ],
+                ),
               ),
               CheckboxListTile(
                 title: const Text('Marcar como importante'),
@@ -253,7 +250,10 @@ class _FormPageState extends State<FormPage> {
               const Divider(height: 28),
               const Text(
                 'Local onde pretende estudar (opcional)',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 10),
               Row(
@@ -276,7 +276,9 @@ class _FormPageState extends State<FormPage> {
                         ? const SizedBox(
                             width: 18,
                             height: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ),
                           )
                         : const Text('Buscar'),
                   ),
@@ -311,7 +313,9 @@ class _FormPageState extends State<FormPage> {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.cloud_upload),
-                  label: Text(salvando ? 'Salvando...' : 'Salvar tarefa'),
+                  label: Text(
+                    salvando ? 'Salvando...' : 'Salvar tarefa',
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4054A5),
                     foregroundColor: Colors.white,
